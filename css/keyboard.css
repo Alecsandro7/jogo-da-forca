@@ -1,0 +1,61 @@
+.keyboard {
+  margin-top: 2rem;
+}
+
+.keys button {
+  width: 24px;
+  height: 27px;
+  margin: 2px;
+  margin-bottom: 10px;
+  font-weight: 900;
+  font-size: 1rem;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  border: 1px solid dimgray;
+  border-radius: 8px;
+  font-family: "Ubuntu", sans-serif;
+  background-color: rgb(238, 115, 14);
+}
+.keys1 button {
+  width: 24px;
+  height: 27px;
+  margin-left: 11px;
+  margin-bottom: 10px;
+  font-weight: 900;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  border: 1px solid dimgray;
+  border-radius: 8px;
+  font-family: "Ubuntu", sans-serif;
+  background-color: rgb(238, 115, 14);
+}
+
+.keys button:hover {
+  transform: scale(1.4);
+}
+
+@media (min-width: 321px) {
+  .keys button {
+    width: 24px;
+    height: 27px;
+  }
+  .keys1 button {
+    width: 24px;
+    height: 27px;
+  }
+}
+
+@media (min-width: 375px) {
+  .keys button {
+    width: 30px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+  .keys1 button {
+    width: 30px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+}

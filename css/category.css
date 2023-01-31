@@ -1,0 +1,14 @@
+.category {
+  margin-top: 1rem;
+  color: #db831f;
+  font-weight: 700;
+  letter-spacing: 5px;
+  border-bottom: 2px solid #583506;
+  font-size: 1.3rem;
+}
+
+@media (min-width: 376px) {
+  .category {
+    font-size: 1.6em;
+  }
+}
