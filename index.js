@@ -1,6 +1,8 @@
-let wordSecretCategory;
+let dynamicList = [];
 
+let wordSecretCategory;
 let wordSecretDrawn;
+
 const words = [
   (palavra001 = {
     name: "BRASIL",
@@ -228,8 +230,38 @@ const words = [
   }),
 ];
 
+createWordSecret();
 function createWordSecret() {
   const indexWord = Math.floor(Math.random() * words.length);
   console.log(indexWord);
+
+  wordSecretDrawn = words[indexWord].name;
+  wordSecretCategory = words[indexWord].category;
 }
-createWordSecret();
+
+putWordOnScreen();
+function putWordOnScreen() {
+  const category = document.getElementById("category");
+  category.innerHTML = wordSecretCategory;
+
+  const wordOnScreen = document.getElementById("secretWord");
+  wordOnScreen.innerHTML = "";
+
+  for (i = 0; i < wordSecretDrawn.length; i++) {
+    if (dynamicList[i] === undefined) {
+      dynamicList[i] = "&nbsp;";
+      console.log(dynamicList[i]);
+      wordOnScreen.innerHTML =
+        wordOnScreen.innerHTML +
+        "<div class='letters' id='letters'> " +
+        dynamicList[i] +
+        "</div>";
+    } else {
+      wordOnScreen.innerHTML =
+        wordOnScreen.innerHTML +
+        "<div class='letters' id='letters'> " +
+        dynamicList[i] +
+        "</div>";
+    }
+  }
+}
