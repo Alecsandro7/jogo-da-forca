@@ -2,6 +2,7 @@ let dynamicList = [];
 
 let wordSecretCategory;
 let wordSecretDrawn;
+let attempts = 6;
 
 const words = [
   (palavra001 = {
@@ -268,10 +269,37 @@ function putWordOnScreen() {
 }
 
 // Verificar a letra escolhida
-function checkChosenLetter(word) {
-  changeFontStyle("tecla-" + word);
+checkChosenLetter();
+function checkChosenLetter() {
+  const todasTeclas = [...document.querySelectorAll(".key")];
+  console.log(todasTeclas.target);
+
+  if (attempts > 0) {
+    let t = todasTeclas.map((el) => {
+      el.addEventListener("click", changeFontStyle);
+    });
+
+    compareLists(t);
+  }
 }
 
-function changeFontStyle(key) {
-  document.getElementById(key).style.borderColor;
+function changeFontStyle(event) {
+  const buttons = event.target;
+  buttons.style.background = "purple";
+  buttons.style.color = "#ffff";
+}
+
+function compareLists(letra) {
+  const possition = wordSecretDrawn.indexOf(letra);
+  if (possition < 0) {
+    attempts--;
+    //aparecer imagem
+    //verificar se ainda tem tentativas // mensagem
+  } else {
+    for (i = 0; i < wordSecretDrawn.length; i++) {
+      if (wordSecretDrawn[i] == letra) {
+        dynamicList[i] = letra;
+      }
+    }
+  }
 }
