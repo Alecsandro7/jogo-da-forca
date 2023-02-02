@@ -248,6 +248,7 @@ function putWordOnScreen() {
   wordOnScreen.innerHTML = "";
 
   for (i = 0; i < wordSecretDrawn.length; i++) {
+    //esse if faz o espaços entre as letras
     if (dynamicList[i] === undefined) {
       dynamicList[i] = "&nbsp;";
       console.log(dynamicList[i]);
@@ -264,4 +265,13 @@ function putWordOnScreen() {
         "</div>";
     }
   }
+}
+
+// Verificar a letra escolhida
+function checkChosenLetter(word) {
+  changeFontStyle("tecla-" + word);
+}
+
+function changeFontStyle(key) {
+  document.getElementById(key).style.borderColor;
 }
