@@ -229,6 +229,10 @@ const words = [
     name: "NESTOR KIRCHNER",
     category: "PRESIDENTE",
   }),
+  (palavra056 = {
+    name: "CACHORRO",
+    category: "ANIMAIS",
+  }),
 ];
 
 createWordSecret();
@@ -268,38 +272,77 @@ function putWordOnScreen() {
   }
 }
 
-// Verificar a letra escolhida
-checkChosenLetter();
-function checkChosenLetter() {
-  const todasTeclas = [...document.querySelectorAll(".key")];
-  console.log(todasTeclas.target);
-
+// Verificar a letra clicada
+function checkChosenLetter(letters) {
   if (attempts > 0) {
-    let t = todasTeclas.map((el) => {
-      el.addEventListener("click", changeFontStyle);
-    });
-
-    compareLists(t);
+    changeFontStyle("key-" + letters);
+    compareLists(letters);
+    putWordOnScreen();
   }
 }
-
-function changeFontStyle(event) {
-  const buttons = event.target;
-  buttons.style.background = "purple";
-  buttons.style.color = "#ffff";
+function changeFontStyle(key) {
+  document.getElementById(key).style.background = "#C71585";
+  document.getElementById(key).style.color = "#ffffff";
 }
 
-function compareLists(letra) {
-  const possition = wordSecretDrawn.indexOf(letra);
-  if (possition < 0) {
+//compara as listas
+function compareLists(letters) {
+  const position = wordSecretDrawn.indexOf(letters);
+  if (position < 0) {
     attempts--;
-    //aparecer imagem
+    loadGallowsImage();
     //verificar se ainda tem tentativas // mensagem
   } else {
     for (i = 0; i < wordSecretDrawn.length; i++) {
-      if (wordSecretDrawn[i] == letra) {
-        dynamicList[i] = letra;
+      if (wordSecretDrawn[i] == letters) {
+        dynamicList[i] = letters;
       }
     }
   }
+
+  let victory = true;
+  for (i = 0; i < wordSecretDrawn.length; i++) {
+    if (wordSecretDrawn[i] != dynamicList[i]) {
+      victory = false;
+    }
+  }
+
+  if (victory === true) {
+    //mensagem na tela
+    attempts = 0;
+  }
 }
+
+// carregar imagem do boneco da forca
+const loadGallowsImage = () => {
+  switch (attempts) {
+    case 5:
+      document.getElementById("image").style.background =
+        "url(../assets/forca01.png)";
+      break;
+    case 4:
+      document.getElementById("image").style.background =
+        "url(../assets/forca02.png)";
+      break;
+    case 3:
+      document.getElementById("image").style.background =
+        "url(../assets/forca03.png)";
+      break;
+    case 2:
+      document.getElementById("image").style.background =
+        "url(../assets/forca04.png)";
+      break;
+    case 1:
+      document.getElementById("image").style.background =
+        "url(../assets/forca05.png)";
+      break;
+    case 0:
+      document.getElementById("image").style.background =
+        "url(../assets/forca06.png)";
+      break;
+    default:
+      document.getElementById("image").style.background =
+        "url(../assets/forca.png)";
+      break;
+  }
+};
