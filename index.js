@@ -190,46 +190,6 @@ const words = [
     category: "PEÇAS DE COMPUTADOR",
   }),
   (palavra047 = {
-    name: "JAIR BOLSONARO",
-    category: "PRESIDENTE",
-  }),
-  (palavra048 = {
-    name: "LUIZ INACIO",
-    category: "PRESIDENTE",
-  }),
-  (palavra049 = {
-    name: "BARACK OBAMA",
-    category: "PRESIDENTE",
-  }),
-  (palavra050 = {
-    name: "GETULIO VARGAS",
-    category: "PRESIDENTE",
-  }),
-  (palavra050 = {
-    name: "DEODORO DA FONSECA",
-    category: "PRESIDENTE",
-  }),
-  (palavra051 = {
-    name: "EPITACIO  PESSOA",
-    category: "PRESIDENTE",
-  }),
-  (palavra052 = {
-    name: "JOHN ADAMS",
-    category: "PRESIDENTE",
-  }),
-  (palavra053 = {
-    name: "ABRAHAM LINCOLN",
-    category: "PRESIDENTE",
-  }),
-  (palavra054 = {
-    name: "DONALD TRUMP",
-    category: "PRESIDENTE",
-  }),
-  (palavra055 = {
-    name: "NESTOR KIRCHNER",
-    category: "PRESIDENTE",
-  }),
-  (palavra056 = {
     name: "CACHORRO",
     category: "ANIMAIS",
   }),
@@ -256,7 +216,7 @@ function putWordOnScreen() {
     //esse if faz o espaços entre as letras
     if (dynamicList[i] === undefined) {
       dynamicList[i] = "&nbsp;";
-      console.log(dynamicList[i]);
+
       wordOnScreen.innerHTML =
         wordOnScreen.innerHTML +
         "<div class='letters' id='letters'> " +
@@ -274,14 +234,24 @@ function putWordOnScreen() {
 
 // Verificar a letra clicada
 function checkChosenLetter(letters) {
+  //desabilita o botao que ja foi clicado
+  const block = (document.getElementById("key-" + letters).disabled = true);
+
   if (attempts > 0) {
-    changeFontStyle("key-" + letters);
     compareLists(letters);
     putWordOnScreen();
   }
 }
-function changeFontStyle(key) {
-  document.getElementById(key).style.background = "#C71585";
+
+//funçoes para mudar cor dos button de acordo com os eeros e acertos
+
+function clickOnTheWrongButton(key) {
+  document.getElementById(key).style.background = "red";
+  document.getElementById(key).style.color = "#ffffff";
+}
+
+function clickOnTheRightButton(key) {
+  document.getElementById(key).style.background = "green";
   document.getElementById(key).style.color = "#ffffff";
 }
 
@@ -290,12 +260,15 @@ function compareLists(letters) {
   const position = wordSecretDrawn.indexOf(letters);
   if (position < 0) {
     attempts--;
+    clickOnTheWrongButton("key-" + letters);
     loadGallowsImage();
+
     //verificar se ainda tem tentativas // mensagem
   } else {
     for (i = 0; i < wordSecretDrawn.length; i++) {
       if (wordSecretDrawn[i] == letters) {
         dynamicList[i] = letters;
+        clickOnTheRightButton("key-" + letters);
       }
     }
   }
@@ -319,6 +292,7 @@ const loadGallowsImage = () => {
     case 5:
       document.getElementById("image").style.background =
         "url(../assets/forca01.png)";
+
       break;
     case 4:
       document.getElementById("image").style.background =

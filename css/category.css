@@ -6,6 +6,11 @@
   border-bottom: 2px solid #583506;
   font-size: 1.3rem;
 }
+@media (min-width: 320px) {
+  .category {
+    font-size: 1em;
+  }
+}
 
 @media (min-width: 376px) {
   .category {

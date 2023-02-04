@@ -17,6 +17,9 @@
   font-family: "Ubuntu", sans-serif;
   background-color: rgb(238, 115, 14);
 }
+.keys button:disabled {
+  cursor: not-allowed;
+}
 
 .keys1 {
   margin-left: 30px;
@@ -37,7 +40,7 @@
 }
 
 .keys1 button:nth-child(8) {
-  background-color: rgb(66, 165, 0);
+  background-color: rgb(25, 0, 165);
 }
 
 .keys button:hover {
