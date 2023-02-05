@@ -1,8 +1,8 @@
-let dynamicList = [];
+let dynamicList = []
 
-let wordSecretCategory;
-let wordSecretDrawn;
-let attempts = 6;
+let wordSecretCategory
+let wordSecretDrawn
+let attempts = 6
 
 const words = [
   (palavra001 = {
@@ -193,41 +193,57 @@ const words = [
     name: "CACHORRO",
     category: "ANIMAIS",
   }),
-];
+]
 
-createWordSecret();
+createWordSecret()
 function createWordSecret() {
-  const indexWord = Math.floor(Math.random() * words.length);
-  console.log(indexWord);
+  const indexWord = Math.floor(Math.random() * words.length)
+  console.log(indexWord)
 
-  wordSecretDrawn = words[indexWord].name;
-  wordSecretCategory = words[indexWord].category;
+  wordSecretDrawn = words[indexWord].name
+  wordSecretCategory = words[indexWord].category
 }
 
-putWordOnScreen();
+putWordOnScreen()
 function putWordOnScreen() {
-  const category = document.getElementById("category");
-  category.innerHTML = wordSecretCategory;
+  const category = document.getElementById("category")
+  category.innerHTML = wordSecretCategory
 
-  const wordOnScreen = document.getElementById("secretWord");
-  wordOnScreen.innerHTML = "";
+  const wordOnScreen = document.getElementById("secretWord")
+  wordOnScreen.innerHTML = ""
 
   for (i = 0; i < wordSecretDrawn.length; i++) {
     //esse if faz o espaços entre as letras
     if (dynamicList[i] === undefined) {
-      dynamicList[i] = "&nbsp;";
+      if (wordSecretDrawn[i] === " ") {
+        dynamicList[i] = " "
+        wordOnScreen.innerHTML =
+          wordOnScreen.innerHTML +
+          "<div class='lettersSapce'> " +
+          dynamicList[i] +
+          "</div>"
+      } else {
+        dynamicList[i] = "&nbsp;"
 
+        wordOnScreen.innerHTML =
+          wordOnScreen.innerHTML +
+          "<div class='letters' id='letters'> " +
+          dynamicList[i] +
+          "</div>"
+      }
+    } else if (wordSecretDrawn[i] === " ") {
+      dynamicList[i] = " "
       wordOnScreen.innerHTML =
         wordOnScreen.innerHTML +
-        "<div class='letters' id='letters'> " +
+        "<div class='lettersSapce'> " +
         dynamicList[i] +
-        "</div>";
+        "</div>"
     } else {
       wordOnScreen.innerHTML =
         wordOnScreen.innerHTML +
         "<div class='letters' id='letters'> " +
         dynamicList[i] +
-        "</div>";
+        "</div>"
     }
   }
 }
@@ -235,54 +251,60 @@ function putWordOnScreen() {
 // Verificar a letra clicada
 function checkChosenLetter(letters) {
   //desabilita o botao que ja foi clicado
-  const block = (document.getElementById("key-" + letters).disabled = true);
+  const block = (document.getElementById("key-" + letters).disabled = true)
 
   if (attempts > 0) {
-    compareLists(letters);
-    putWordOnScreen();
+    compareLists(letters)
+    putWordOnScreen()
   }
 }
 
 //funçoes para mudar cor dos button de acordo com os eeros e acertos
 
 function clickOnTheWrongButton(key) {
-  document.getElementById(key).style.background = "red";
-  document.getElementById(key).style.color = "#ffffff";
+  document.getElementById(key).style.background = "red"
+  document.getElementById(key).style.color = "#ffffff"
 }
 
 function clickOnTheRightButton(key) {
-  document.getElementById(key).style.background = "green";
-  document.getElementById(key).style.color = "#ffffff";
+  document.getElementById(key).style.background = "green"
+  document.getElementById(key).style.color = "#ffffff"
 }
 
 //compara as listas
 function compareLists(letters) {
-  const position = wordSecretDrawn.indexOf(letters);
+  const position = wordSecretDrawn.indexOf(letters)
   if (position < 0) {
-    attempts--;
-    clickOnTheWrongButton("key-" + letters);
-    loadGallowsImage();
+    attempts--
+    clickOnTheWrongButton("key-" + letters)
+    loadGallowsImage()
 
+    if (attempts == 0) {
+      openModal(
+        `OPS!`,
+        `Você deixou o Manoel Gomes morrer 😭 <br> A palavra secreta era "${wordSecretDrawn}"`
+      )
+    }
     //verificar se ainda tem tentativas // mensagem
   } else {
     for (i = 0; i < wordSecretDrawn.length; i++) {
       if (wordSecretDrawn[i] == letters) {
-        dynamicList[i] = letters;
-        clickOnTheRightButton("key-" + letters);
+        dynamicList[i] = letters
+        clickOnTheRightButton("key-" + letters)
       }
     }
   }
 
-  let victory = true;
+  let victory = true
   for (i = 0; i < wordSecretDrawn.length; i++) {
     if (wordSecretDrawn[i] != dynamicList[i]) {
-      victory = false;
+      victory = false
     }
   }
 
   if (victory === true) {
-    //mensagem na tela
-    attempts = 0;
+    openModal(`Parabéns!`, `Você Salvou o Manoel Gomes  🥳 `)
+    attempts = 0
   }
 }
 
@@ -291,32 +313,54 @@ const loadGallowsImage = () => {
   switch (attempts) {
     case 5:
       document.getElementById("image").style.background =
-        "url(../assets/forca01.png)";
+        "url(../assets/forca01.png)"
 
-      break;
+      break
     case 4:
       document.getElementById("image").style.background =
-        "url(../assets/forca02.png)";
-      break;
+        "url(../assets/forca02.png)"
+      break
     case 3:
       document.getElementById("image").style.background =
-        "url(../assets/forca03.png)";
-      break;
+        "url(../assets/forca03.png)"
+      break
     case 2:
       document.getElementById("image").style.background =
-        "url(../assets/forca04.png)";
-      break;
+        "url(../assets/forca04.png)"
+      break
     case 1:
       document.getElementById("image").style.background =
-        "url(../assets/forca05.png)";
-      break;
+        "url(../assets/forca05.png)"
+      break
     case 0:
       document.getElementById("image").style.background =
-        "url(../assets/forca06.png)";
-      break;
+        "url(../assets/forca06.png)"
+      break
     default:
       document.getElementById("image").style.background =
-        "url(../assets/forca.png)";
-      break;
+        "url(../assets/forca.png)"
+      break
   }
-};
+}
+
+// modal
+
+function openModal(title, mensage) {
+  let modalTitle = document.getElementById("exampleModalLabel")
+  modalTitle.innerText = title
+
+  let modalBody = document.getElementById("modalBody")
+  modalBody.innerHTML = mensage
+
+  $("#myModal").modal({
+    show: true,
+  })
+}
+
+let btnRefresh = document.getElementById("btnrRefresh")
+
+const reload = (ev) => {
+  console.log(ev)
+  location.reload()
+}
+btnRefresh.addEventListener("click", reload)

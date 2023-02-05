@@ -4,4 +4,6 @@
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
+  margin-top: 10px;
+  width: 100vw;
 }
